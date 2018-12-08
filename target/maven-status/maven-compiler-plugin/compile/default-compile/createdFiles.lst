@@ -1,0 +1,6 @@
+springBoot/bank/repository/BankBranchRepository.class
+META-INF/spring-configuration-metadata.json
+springBoot/bank/MainConfig.class
+springBoot/bank/controller/BankOperations.class
+springBoot/bank/client/Bank_branches.class
+springBoot/bank/App.class
