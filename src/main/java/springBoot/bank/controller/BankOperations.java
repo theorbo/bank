@@ -27,7 +27,7 @@ public class BankOperations {
 		} else {
 			Bank_branches response = bankBranchRepository.findByIfsc(ifsc);
 			if (response == null) {
-				return new ResponseEntity("IFSC does not exist", HttpStatus.NO_CONTENT);
+				return new ResponseEntity("ERROR : IFSC does not exist", HttpStatus.OK);
 			} else {
 				return new ResponseEntity(response, HttpStatus.OK);
 			}
@@ -44,26 +44,12 @@ public class BankOperations {
 		} else {
 			List<Bank_branches> bankBranchList = bankBranchRepository.findByNameAndCity(name.toUpperCase(), city.toUpperCase());
 			if(bankBranchList == null || bankBranchList.isEmpty()) {
-				return new ResponseEntity("No branches exist for" + city + " and " + name, HttpStatus.NO_CONTENT);
+				return new ResponseEntity("ERROR : No branches exist for" + city + " and " + name, HttpStatus.OK);
 			}else {
 				return new ResponseEntity(bankBranchList, HttpStatus.OK);
 			}
 		}
 
-		/*
-		 * BankBranch bb= new
-		 * BankBranch("1234",1000l,"patamda","rangatard","jamshedpur",
-		 * " east singhbhum", " jharkhand"); BankBranch bb1= new
-		 * BankBranch("1234",1000l,"patamda","rangatard","jamshedpur",
-		 * " east singhbhum", " jharkhand");
-		 * 
-		 * List<BankBranch> bb2 = new ArrayList<BankBranch>(); bb2.add(bb);
-		 * bb2.add(bb1);
-		 */
-
-		// Optional<BankBranch> b = bankService.findById(ifsc);
-
-		// return new ResponseEntity(b,HttpStatus.OK);
 	}
 
 }
