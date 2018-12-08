@@ -23,7 +23,9 @@ public class BankOperations {
 	public ResponseEntity<?> getBranchDetail(@RequestParam(value = "ifsc") String ifsc) {
 
 		if (StringUtils.isEmpty(ifsc)) {
-			return new ResponseEntity(null, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity("{\n" + 
+						"	\"Error\" : \"IFSC Code not given\"\n" + 
+						"} ", HttpStatus.OK);
 		} else {
 			Bank_branches response = bankBranchRepository.findByIfsc(ifsc);
 			if (response == null) {
@@ -33,8 +35,7 @@ public class BankOperations {
 			} else {
 				return new ResponseEntity(response, HttpStatus.OK);
 			}
-			// System.out.println("********************" + response.toString());
-
+		
 		}
 	}
 
@@ -42,7 +43,9 @@ public class BankOperations {
 	public ResponseEntity<?> getBranches(@RequestParam(value = "name") String name,
 			@RequestParam(value = "city") String city) {
 		if (StringUtils.isEmpty(city) || StringUtils.isEmpty(name)) {
-			return new ResponseEntity(null, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity("{\n" + 
+						"	\"Error\" : \"City and/or bank not given\"\n" + 
+						"} ", HttpStatus.OK);
 		} else {
 			List<Bank_branches> bankBranchList = bankBranchRepository.findByNameAndCity(name.toUpperCase(), city.toUpperCase());
 			if(bankBranchList == null || bankBranchList.isEmpty()) {
