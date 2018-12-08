@@ -27,7 +27,9 @@ public class BankOperations {
 		} else {
 			Bank_branches response = bankBranchRepository.findByIfsc(ifsc);
 			if (response == null) {
-				return new ResponseEntity("ERROR : IFSC does not exist", HttpStatus.OK);
+				return new ResponseEntity("{\n" + 
+						"	\"Error\" : \"IFSC Code does not exist\"\n" + 
+						"} ", HttpStatus.OK);
 			} else {
 				return new ResponseEntity(response, HttpStatus.OK);
 			}
@@ -44,7 +46,9 @@ public class BankOperations {
 		} else {
 			List<Bank_branches> bankBranchList = bankBranchRepository.findByNameAndCity(name.toUpperCase(), city.toUpperCase());
 			if(bankBranchList == null || bankBranchList.isEmpty()) {
-				return new ResponseEntity("ERROR : No branches exist for" + city + " and " + name, HttpStatus.OK);
+				return new ResponseEntity("{\n" + 
+						"	\"Error\" : \"City and/or bank does not exist\"\n" + 
+						"} ", HttpStatus.OK);
 			}else {
 				return new ResponseEntity(bankBranchList, HttpStatus.OK);
 			}
